@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
+  <defs>
+    <!-- Left Loop Front Gradient (Red to Green) -->
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF1A1A"/>
+      <stop offset="30%" stop-color="#FF8C00"/>
+      <stop offset="70%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#32CD32"/>
+    </linearGradient>
+    
+    <!-- Right Loop Front Gradient (Green to Violet) -->
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#32CD32"/>
+      <stop offset="30%" stop-color="#00CED1"/>
+      <stop offset="70%" stop-color="#1E90FF"/>
+      <stop offset="100%" stop-color="#8A2BE2"/>
+    </linearGradient>
+
+    <!-- Right Loop Back Gradient (Dark Violet to Red) -->
+    <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8A2BE2"/>
+      <stop offset="100%" stop-color="#FF1A1A"/>
+    </linearGradient>
+
+    <!-- Filters for 3D Drop Shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.2"/>
+    </filter>
+    <filter id="inner-shadow">
+      <feOffset dx="0" dy="4"/>
+      <feGaussianBlur stdDeviation="5" result="offset-blur"/>
+      <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+      <feFlood flood-color="black" flood-opacity="0.3" result="color"/>
+      <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+      <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  <!-- We use thick paths carefully layered to create the 3D overlap effect -->
+
+  <!-- 1. Right Loop Background (Underneath) -->
+  <path d="M400,200 C470,280 550,330 630,330 C720,330 780,270 780,200 C780,130 720,70 630,70 C550,70 470,120 400,200"
+        fill="none" stroke="url(#grad3)" stroke-width="80" stroke-linecap="butt" filter="url(#shadow)"/>
+
+  <!-- 2. Left Loop Entire (Over Right Back, Under Right Front) -->
+  <path d="M400,200 C330,120 250,70 170,70 C80,70 20,130 20,200 C20,270 80,330 170,330 C250,330 330,280 400,200"
+        fill="none" stroke="url(#grad1)" stroke-width="80" stroke-linecap="butt" filter="url(#shadow)"/>
+
+  <!-- 3. Right Loop Foreground (Over Left) -->
+  <path d="M400,200 C470,120 550,70 630,70 C720,70 780,130 780,200 C780,205 779,210 778,215"
+        fill="none" stroke="url(#grad2)" stroke-width="80" stroke-linecap="butt" filter="url(#shadow)"/>
+
+  <!-- 4. Inner Highlights for 3D Tube Effect -->
+  <path d="M400,200 C470,280 550,330 630,330 C720,330 780,270 780,200 C780,130 720,70 630,70 C550,70 470,120 400,200"
+        fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="butt" opacity="0.15"/>
+  <path d="M400,200 C330,120 250,70 170,70 C80,70 20,130 20,200 C20,270 80,330 170,330 C250,330 330,280 400,200"
+        fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="butt" opacity="0.15"/>
+  <path d="M400,200 C470,120 550,70 630,70 C720,70 780,130 780,200 C780,205 779,210 778,215"
+        fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="butt" opacity="0.3"/>
+</svg>
